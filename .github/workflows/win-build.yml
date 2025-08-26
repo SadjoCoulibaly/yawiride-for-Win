@@ -1,0 +1,30 @@
+name: Build Windows .exe
+
+on:
+  workflow_dispatch:  # permet de lancer manuellement
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Windows installer
+        run: npm run dist -- --win nsis
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: yawi-ride-windows
+          path: dist/*
+
