@@ -1,0 +1,38 @@
+{
+  "name": "yawiride-desktop",
+  "version": "1.0.0",
+  "description": "Application bureau Yawi Ride (offline)",
+  "main": "main.js",
+  "author": "Yawi Group",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yawigroup.yawiride",
+    "productName": "Yawi Ride",
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json",
+      "build/**/*"
+    ],
+    "asar": true,
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "category": "public.app-category.navigation"
+    },
+    "win": {
+      "icon": "assets/icon.png",
+      "target": ["nsis", "zip"]
+    }
+  }
+}
